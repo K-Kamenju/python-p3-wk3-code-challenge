@@ -1,14 +1,11 @@
 # imports from sqlalchemy
-from sqlalchemy import create_engine, func
+from sqlalchemy import func
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.associationproxy import association_proxy
 
-# create the engine database
-engine = create_engine("sqlite:///code_challenge_restaurants.db")
-
-# 
+# this is the base class
 Base = declarative_base()
 
 
