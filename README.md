@@ -26,6 +26,20 @@ when in the `pipenv shell`
 
 Before buidling out our methods, we need to create 3 tables for the reviews, restaurants and customers. 
 
+NOTE: I have created a seed file which populates the tables we will create with random data and below are images of the tables through the DB Browser Interface 
+
+### __restaurants__
+
+![restaurants](./images/restaurants_table.png)
+
+### __customers__
+
+![customers](./images/customers_table.png)
+
+### __reviews__
+
+![reviews](./images/reviews_table.png)
+
 To establish the necessary relationships and create the required columns for the reviews table, a migration script needs to be executed. The Review table should have foreign key columns for customer_id and restaurant_id to associate each review with a customer and a restaurant. Additionally, there should be a star_rating column to store the integer value representing the rating for a review.
 
 Ensure that you install the alembic library which will handle migrations in our code:
