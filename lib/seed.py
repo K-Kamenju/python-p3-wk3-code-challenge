@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+# import faker
 from faker import Faker
 import random
 
