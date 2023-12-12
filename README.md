@@ -16,6 +16,12 @@ This project involves three main models in a Yelp-style domain: Restaurant, Cust
 5. Add a License file, preferrably the MIT license
 6. Ensure to organize your python solution in a lib folder
 
+NOTE: To run the test suites for this project, run:
+
+                python lib/testing.py
+
+when in the `pipenv shell`
+
 ## `DELIVERABLE 1 - Migrations`
 
 Before buidling out our methods, we need to create 3 tables for the reviews, restaurants and customers. 
