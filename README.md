@@ -1,4 +1,4 @@
-# Python Week 3 - Code Chall
+# Python Week 3 - Code Challenge
 
 This project involves three main models in a Yelp-style domain: Restaurant, Customer, and Review. The relationships between these models are defined as follows:
 
