@@ -6,79 +6,57 @@ import random
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models import Customer, Restaurant, Review
+from models import Restaurant, Customer, Review, Base
 
-if __name__ == "__main__":
-    
-    # this creates the database
-    engine = create_engine("sqlite:///code_challenge_restaurants.db")
-    
-    # creates a session that will allow us to interact with the database
-    Session = sessionmaker(bind = engine)
+if __name__ == '__main__':
+    engine = create_engine('sqlite:///code_challenge_restaurants.db')
+    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine)
     session = Session()
-    
-    # delete active sessions when the seed file is called
+
+    # Clear existing data
     session.query(Review).delete()
-    session.query(Restaurant).delete()
     session.query(Customer).delete()
-    
-    # call the fake method
+    session.query(Restaurant).delete()
+
     fake = Faker()
-    
-    restaurant_names = ["Bwibo", "KFC", "McDonalds", "Panda Express", "Subway", "Java", "Nyama Mama", "Pepper Tree", "Tin Roof", "Cultiva", "Quest Cafe", "The Lounge", "Dan's Sushi", "Joes Pizza", "Cafe Rio"]
-    
-    # adding data for the restaurant
+
+    # Generate Restaurants
     restaurants = []
-    for i in range(16):
+    for i in range(20):
         restaurant = Restaurant(
-            name = random.choice(restaurant_names),
-            price = random.randint(1,10)
+            name=fake.company(),
+            price=random.randint(1, 50)
         )
-        
-        # add and commit individually to get IDs back
         session.add(restaurant)
         session.commit()
-        
-        # add the restaurant to the list
         restaurants.append(restaurant)
-    
-    
-    # adding data for the customer
+
+    # Generate Customers
     customers = []
-    for i in range(10):
+    for i in range(20):
         customer = Customer(
-            first_name = fake.first_name(),
-            last_name = fake.last_name()
+            first_name=fake.first_name(),
+            last_name=fake.last_name()
         )
-        
-        # add and commit individually to get IDs back
         session.add(customer)
         session.commit()
-        
-        # add the customer to the list
         customers.append(customer)
-    
-    reviews = []
-    for restaurant in restaurants:
-        for i in range(random.randint(0,5)):
-            customer = random.choice(customers)
-            # adds the restaurant to the customer if it wasn't already
-            if restaurant not in customer.restaurants:
-                customer.restaurants.append(restaurant)
-                session.add(Customer)
-                session.commit()
-            
-            # add the review   
-            review = Review(
-                comments = fake.sentence(),
-                star_rating = random.randint(1,5),
-                customer_id = customer.id,
-                restaurant_id = restaurant.id
-            )
 
-            reviews.append(review)
-    
-    # add and commit 
-    session.bulk_save_objects(reviews)
-    session.commit()
+    # Generate Reviews
+    reviews = []
+    for i in range(50):
+        restaurant = random.choice(restaurants)
+        customer = random.choice(customers)
+
+        review = Review(
+            comments=fake.sentence(),
+            star_rating=random.randint(1, 5),
+            customer_id=customer.id,
+            restaurant_id=restaurant.id
+        )
+        session.add(review)
+        session.commit()
+        reviews.append(review)
+
     session.close()

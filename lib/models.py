@@ -19,7 +19,7 @@ class Restaurant(Base):
     
     # These are the columns for that table
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
+    name = Column(String(250))
     price = Column(Integer())
     
     # relationship link
@@ -45,8 +45,8 @@ class Customer(Base):
     
     # These are the columns for that table
     id = Column(Integer, primary_key=True)
-    first_name = Column(String(10), nullable=False)
-    last_name = Column(String(10), nullable=False)
+    first_name = Column(String(10))
+    last_name = Column(String(10))
     
     # relationship link
     reviews = relationship("Review", back_populates="customer")
@@ -71,7 +71,7 @@ class Review(Base):
     
     # These are the columns for that table
     id = Column(Integer, primary_key=True)
-    comments = Column(String(300), nullable=False)
+    comments = Column(String())
     star_rating = Column(Integer())
     
     # foreign keys
