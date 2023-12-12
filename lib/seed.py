@@ -30,8 +30,13 @@ if __name__ == '__main__':
             price=random.randint(1, 50)
         )
         session.add(restaurant)
-        session.commit()
+        
         restaurants.append(restaurant)
+        
+    session.commit()
+    
+    # Print statement to check the number of restaurants generated
+    print("Number of Restaurants:", session.query(Restaurant).count())
 
     # Generate Customers
     customers = []
@@ -41,9 +46,13 @@ if __name__ == '__main__':
             last_name=fake.last_name()
         )
         session.add(customer)
-        session.commit()
+        
         customers.append(customer)
 
+    session.commit()
+    # Print statement to check the number of customers generated
+    print("Number of Customers:", session.query(Customer).count())
+    
     # Generate Reviews
     reviews = []
     for i in range(50):
@@ -57,7 +66,12 @@ if __name__ == '__main__':
             restaurant_id=restaurant.id
         )
         session.add(review)
-        session.commit()
+        
         reviews.append(review)
-
+    
+    session.commit()
+    
+    # Print statement to check the number of reviews generated
+    print("Number of Reviews:", session.query(Review).count())
+    
     session.close()
