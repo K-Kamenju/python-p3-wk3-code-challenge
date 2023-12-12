@@ -45,8 +45,8 @@ class Customer(Base):
     
     # These are the columns for that table
     id = Column(Integer, primary_key=True)
-    first_name = Column(String(25), nullable=False)
-    last_name = Column(String(25), nullable=False)
+    first_name = Column(String(10), nullable=False)
+    last_name = Column(String(10), nullable=False)
     
     # relationship link
     reviews = relationship("Review", back_populates="customer")
